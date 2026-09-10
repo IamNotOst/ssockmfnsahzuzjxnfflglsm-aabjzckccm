@@ -3,84 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Евгений — IamNotOst</title>
+    <title>EO — IamNotOst</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-    <!-- Градиентный интерактивный фон -->
-    <div class="glow-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-    </div>
-
-    <!-- Верхняя панель настроек (Тема и Язык) -->
-    <header class="toolbar fade-in">
-        <button class="tool-btn" id="langBtn" title="Переключить язык">
-            <i data-lucide="globe"></i>
-            <span id="langText">EN</span>
-        </button>
-        <button class="tool-btn" id="themeBtn" title="Сменить тему">
-            <i data-lucide="sun" class="sun-icon"></i>
-            <i data-lucide="moon" class="moon-icon"></i>
-        </button>
+    <!-- Шапка управления -->
+    <header class="top-bar fade-in">
+        <div class="brand-code">SYS.IO // 26.09</div>
+        <div class="controls">
+            <button class="btn-toggle" id="langBtn">
+                <i data-lucide="globe"></i> <span id="langText">EN</span>
+            </button>
+            <button class="btn-toggle" id="themeBtn">
+                <i data-lucide="sun" class="icon-sun"></i>
+                <i data-lucide="moon" class="icon-moon"></i>
+            </button>
+        </div>
     </header>
 
-    <main class="wrapper">
-        <!-- Главная карточка профиля -->
-        <section class="card hero-card tilt-effect fade-in">
-            <div class="avatar-container">
-                <div class="avatar">EO</div>
-                <div class="status-dot" id="statusDot"></div>
+    <main class="container">
+        <!-- Главный профиль -->
+        <section class="card profile-card fade-in">
+            <div class="card-glow"></div>
+            <div class="profile-header">
+                <div class="avatar-wrap">
+                    <div class="avatar">EO</div>
+                    <span class="status-indicator" id="statusDot"></span>
+                </div>
+                <div class="profile-info">
+                    <h1 class="name" data-i18n="name"></h1>
+                    <p class="aliases" data-i18n="aliases"></p>
+                </div>
             </div>
-            
-            <h1 class="title" data-i18n="name"></h1>
-            <p class="subtitle" data-i18n="aliases"></p>
-
-            <div class="meta-tags">
-                <span class="tag pulse-tag"><i data-lucide="cake"></i> <span data-i18n="dob"></span></span>
-                <span class="tag pulse-tag"><i data-lucide="languages"></i> <span data-i18n="langs"></span></span>
-            </div>
-        </section>
-
-        <!-- Стек технологий -->
-        <section class="card tilt-effect fade-in">
-            <h2 class="card-title"><i data-lucide="code-2"></i> <span data-i18n="secProgramming"></span></h2>
-            <div class="skills-grid">
-                <span class="skill primary glow-on-hover">Python</span>
-                <span class="skill primary glow-on-hover">Java</span>
-                <span class="skill primary glow-on-hover">Lua</span>
-                <span class="skill secondary glow-on-hover">HTML</span>
-                <span class="skill secondary glow-on-hover">CSS</span>
-                <span class="skill secondary glow-on-hover">JS</span>
+            <div class="badges">
+                <span class="badge"><i data-lucide="calendar"></i> <span data-i18n="dob"></span></span>
+                <span class="badge"><i data-lucide="languages"></i> <span data-i18n="langs"></span></span>
             </div>
         </section>
 
-        <!-- Статус / Личные границы -->
-        <section class="card boundary-card tilt-effect fade-in">
-            <h2 class="card-title"><i data-lucide="heart-handshake"></i> <span data-i18n="secStatus"></span></h2>
-            <p class="text" data-i18n="textStatus"></p>
+        <!-- Стек -->
+        <section class="card fade-in">
+            <div class="card-glow"></div>
+            <div class="card-head">
+                <i data-lucide="terminal" class="head-icon"></i>
+                <h2 data-i18n="secProgramming"></h2>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item highlight-tech">Python</div>
+                <div class="tech-item highlight-tech">Java</div>
+                <div class="tech-item highlight-tech">Lua</div>
+                <div class="tech-item">HTML</div>
+                <div class="tech-item">CSS</div>
+                <div class="tech-item">JS</div>
+            </div>
+        </section>
+
+        <!-- Статус и Границы -->
+        <section class="card danger-border fade-in">
+            <div class="card-glow"></div>
+            <div class="card-head">
+                <i data-lucide="shield-alert" class="head-icon danger-icon"></i>
+                <h2 data-i18n="secStatus"></h2>
+            </div>
+            <p class="card-text" data-i18n="textStatus"></p>
         </section>
 
         <!-- Безопасность -->
-        <section class="card tilt-effect fade-in">
-            <h2 class="card-title"><i data-lucide="shield-check"></i> <span data-i18n="secSecurity"></span></h2>
-            <p class="text" data-i18n="textSecurity"></p>
+        <section class="card fade-in">
+            <div class="card-glow"></div>
+            <div class="card-head">
+                <i data-lucide="lock" class="head-icon"></i>
+                <h2 data-i18n="secSecurity"></h2>
+            </div>
+            <p class="card-text" data-i18n="textSecurity"></p>
         </section>
 
-        <!-- Контакты и почта -->
-        <section class="card tilt-effect fade-in">
-            <h2 class="card-title"><i data-lucide="message-square-text"></i> <span data-i18n="secContacts"></span></h2>
-            <p class="text" data-i18n="textContacts"></p>
-            
-            <div class="email-box ripple-btn" id="emailBtn">
-                <i data-lucide="mail" class="email-icon"></i>
-                <span id="emailText">EvgeniyOst@xyecoc.com</span>
-                <span class="copy-tooltip" id="tooltip" data-i18n="tooltipCopy"></span>
+        <!-- Контакты -->
+        <section class="card fade-in">
+            <div class="card-glow"></div>
+            <div class="card-head">
+                <i data-lucide="message-square" class="head-icon"></i>
+                <h2 data-i18n="secContacts"></h2>
+            </div>
+            <p class="card-text" data-i18n="textContacts"></p>
+
+            <div class="email-clickbox" id="emailBtn">
+                <div class="email-left">
+                    <i data-lucide="mail"></i>
+                    <span id="emailText">EvgeniyOst@xyecoc.com</span>
+                </div>
+                <span class="copy-badge" id="tooltip" data-i18n="tooltipCopy"></span>
             </div>
         </section>
     </main>
@@ -89,4 +106,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
