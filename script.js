@@ -9,27 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailText = document.getElementById('emailText').innerText;
     const tooltip = document.getElementById('tooltip');
 
-    // 1. Инициализация Иконок Lucide
     const initIcons = () => { if (window.lucide) lucide.createIcons(); };
 
-    // 2. Система Языков (i18n)
+    // 1. Смена языков
     const updateLanguage = (lang) => {
-        document.querySelectorAll('.wrapper').forEach(el => el.classList.add('lang-changing'));
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                element.innerHTML = translations[lang][key];
+                element.classList.add('text-swap');
+                setTimeout(() => element.classList.remove('text-swap'), 200);
+            }
+        });
 
-        setTimeout(() => {
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
-                }
-            });
-
-            langText.innerText = lang === 'ru' ? 'EN' : 'RU';
-            document.getElementById('statusDot').title = translations[lang].statusBadge;
-            initIcons();
-
-            document.querySelectorAll('.wrapper').forEach(el => el.classList.remove('lang-changing'));
-        }, 150);
+        langText.innerText = lang === 'ru' ? 'EN' : 'RU';
+        initIcons();
     };
 
     langBtn.addEventListener('click', () => {
@@ -38,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLanguage(currentLang);
     });
 
-    // 3. Система Тем (Light/Dark)
+    // 2. Смена темы
     const setTheme = (theme) => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('site_theme', theme);
@@ -49,63 +43,38 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(currentTheme);
     });
 
-    // Первоначальная загрузка настроек
+    // Загрузка стартовых настроек
     setTheme(currentTheme);
     updateLanguage(currentLang);
 
-    // 4. Копирование Email с фидбеком
-    emailBtn.addEventListener('click', async (e) => {
+    // 3. Копирование почты
+    emailBtn.addEventListener('click', async () => {
         try {
             await navigator.clipboard.writeText(emailText);
             const originalText = translations[currentLang].tooltipCopy;
-            
+
             tooltip.innerText = translations[currentLang].tooltipCopied;
             tooltip.style.color = '#22c55e';
+            tooltip.style.borderColor = '#22c55e';
 
             setTimeout(() => {
                 tooltip.innerText = originalText;
                 tooltip.style.color = '';
-            }, 2000);
+                tooltip.style.borderColor = '';
+            }, 1800);
         } catch (err) {
-            console.error('Ошибка:', err);
+            console.error(err);
         }
     });
 
-    // 5. Анимация нажатия (Ripple Effect) на кликабельных элементах
-    document.querySelectorAll('.ripple-btn, .tool-btn').forEach(button => {
-        button.addEventListener('click', function (e) {
-            const circle = document.createElement('span');
-            const diameter = Math.max(this.clientWidth, this.clientHeight);
-            const radius = diameter / 2;
-
-            const rect = this.getBoundingClientRect();
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - rect.left - radius}px`;
-            circle.style.top = `${e.clientY - rect.top - radius}px`;
-            circle.classList.add('ripple');
-
-            const ripple = this.getElementsByClassName('ripple')[0];
-            if (ripple) ripple.remove();
-
-            this.appendChild(circle);
+    // 4. Отслеживание курсора для отклика рамок (Glow tracking)
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
         });
     });
-
-    // 6. 3D Tilt эффект при наведении мыши на карточки
-    if (window.innerWidth > 768) {
-        document.querySelectorAll('.tilt-effect').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-
-                card.style.transform = `perspective(1000px) rotateX(${-y / 25}deg) rotateY(${x / 25}deg) translateY(-4px)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-            });
-        });
-    }
 });
-
