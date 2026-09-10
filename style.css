@@ -1,0 +1,375 @@
+/* ==========================================================================
+   CSS Переменные (Переключение Тёмной и Светлой темы)
+   ========================================================================== */
+:root {
+    --transition-speed: 0.35s;
+    --font-main: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme="dark"] {
+    --bg-color: #08090d;
+    --card-bg: rgba(18, 20, 29, 0.65);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border-hover: rgba(99, 102, 241, 0.4);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent-primary: #6366f1;
+    --accent-secondary: #a855f7;
+    --accent-danger: #ef4444;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --email-bg: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(0, 0, 0, 0.08);
+    --card-border-hover: rgba(99, 102, 241, 0.5);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent-primary: #4f46e5;
+    --accent-secondary: #9333ea;
+    --accent-danger: #dc2626;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --email-bg: rgba(238, 242, 255, 0.8);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-speed) ease,
+                color var(--transition-speed) ease,
+                border-color var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 16px 32px 16px;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Анимированный Неоновый Фон
+   ========================================================================== */
+.glow-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.22;
+    animation: floatBlob 14s infinite alternate ease-in-out;
+}
+
+.blob-1 { background: var(--accent-primary); top: -60px; left: 15%; }
+.blob-2 { background: var(--accent-secondary); bottom: -60px; right: 15%; animation-delay: -7s; }
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    100% { transform: translate(40px, 60px) scale(1.15) rotate(180deg); }
+}
+
+/* ==========================================================================
+   Панель Инструментов (Переключатели)
+   ========================================================================== */
+.toolbar {
+    position: fixed;
+    top: 16px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    padding: 6px 12px;
+    border-radius: 100px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+.tool-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-btn:hover {
+    background: rgba(99, 102, 241, 0.15);
+    transform: scale(1.05);
+}
+
+.tool-btn:active {
+    transform: scale(0.95);
+}
+
+[data-theme="dark"] .sun-icon { display: block; }
+[data-theme="dark"] .moon-icon { display: none; }
+[data-theme="light"] .sun-icon { display: none; }
+[data-theme="light"] .moon-icon { display: block; }
+
+/* ==========================================================================
+   Основная Контейнерная Вёрстка
+   ========================================================================== */
+.wrapper {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 8px 30px var(--shadow-color);
+    position: relative;
+    will-change: transform;
+}
+
+.card:hover {
+    border-color: var(--card-border-hover);
+    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+}
+
+.card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title svg {
+    width: 18px; height: 18px;
+    color: var(--accent-primary);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-title svg {
+    transform: rotate(12deg) scale(1.1);
+}
+
+.text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.text strong { color: var(--text-main); }
+
+/* ==========================================================================
+   Герой карточка & Аватар
+   ========================================================================== */
+.hero-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-container {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    display: flex; justifyContent: center; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 1.8rem; font-weight: 700;
+    color: #fff;
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+    animation: avatarPulse 4s infinite alternate ease-in-out;
+}
+
+@keyframes avatarPulse {
+    0% { transform: scale(1); box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+    100% { transform: scale(1.04); box-shadow: 0 0 35px rgba(168, 85, 247, 0.5); }
+}
+
+.status-dot {
+    position: absolute; bottom: 2px; right: 2px;
+    width: 14px; height: 14px;
+    background-color: #22c55e;
+    border: 3px solid var(--bg-color);
+    border-radius: 50%;
+    animation: dotBlink 2s infinite ease-in-out;
+}
+
+@keyframes dotBlink {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+.title { font-size: 1.75rem; font-weight: 700; }
+.subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
+.highlight { color: var(--text-main); font-weight: 600; }
+
+.link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--accent-primary);
+    transition: all 0.2s ease;
+}
+
+.link:hover {
+    color: var(--accent-secondary);
+    border-bottom-color: var(--accent-secondary);
+}
+
+.meta-tags { display: flex; gap: 8px; margin-top: 16px; }
+
+.tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    padding: 6px 12px; border-radius: 100px;
+    font-size: 0.8rem; color: var(--text-muted);
+}
+
+.tag svg { width: 14px; height: 14px; }
+
+/* ==========================================================================
+   Сетка Скиллов
+   ========================================================================== */
+.skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.skill {
+    font-family: var(--font-mono);
+    font-size: 0.82rem; padding: 6px 12px;
+    border-radius: 8px; border: 1px solid transparent;
+    cursor: default;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.skill.primary {
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--accent-primary);
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+.skill.secondary {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    border-color: var(--card-border);
+}
+
+.skill:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.2);
+}
+
+.boundary-card { border-left: 4px solid var(--accent-danger); }
+.boundary-card .card-title svg { color: var(--accent-danger); }
+
+/* ==========================================================================
+   Кликабельная зона Email c анимацией
+   ========================================================================== */
+.email-box {
+    margin-top: 16px;
+    background: var(--email-bg);
+    border: 1px dashed var(--accent-primary);
+    padding: 12px 16px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--accent-primary);
+}
+
+.email-box:hover {
+    background: rgba(99, 102, 241, 0.15);
+    transform: scale(1.01);
+}
+
+.copy-tooltip {
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px; border-radius: 6px;
+}
+
+/* ==========================================================================
+   Анимации Появления & Микро-интеракции
+   ========================================================================== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.12s; }
+.card:nth-child(3) { animation-delay: 0.19s; }
+.card:nth-child(4) { animation-delay: 0.26s; }
+.card:nth-child(5) { animation-delay: 0.33s; }
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Эффект волны при клике (Ripple Effect) */
+.ripple {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: rippleAnim 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes rippleAnim {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* Эффект плавной смены языка (Fade) */
+.lang-changing {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: all 0.15s ease;
+}
+
+@media (max-width: 480px) {
+    body { padding-top: 65px; }
+    .card { padding: 18px; }
+    .title { font-size: 1.5rem; }
+    .email-box { flex-direction: column; gap: 8px; text-align: center; }
+}
+
