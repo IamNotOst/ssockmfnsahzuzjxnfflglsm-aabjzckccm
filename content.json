@@ -1,0 +1,106 @@
+{
+  "ru": {
+    "brand": "OST",
+    "langLabel": "RU",
+    "footer": "© IamNotOst",
+    "hero": {
+      "greet": "Приветствую!",
+      "name": "Меня зовут",
+      "nameAccent": "Евгений",
+      "alias": "известен как",
+      "aliasList": "«Ост» и «IamNotOst»"
+    },
+    "sections": [
+      {
+        "title": "О себе",
+        "icon": "◆",
+        "items": [
+          "Дата рождения — <code>26.09</code>",
+          "Свободно владею русским и английским",
+          "Уверенно пишу на <b>Python</b>, <b>Java</b>, <b>Lua</b>",
+          "Веб-стек: <b>HTML</b>, <b>CSS</b>, <b>JS</b> — прикладной уровень"
+        ]
+      },
+      {
+        "title": "Границы",
+        "icon": "◇",
+        "items": [
+          "Новых знакомств не ищу",
+          "Состою в отношениях — <u>это граница</u>",
+          "Личное пространство не обсуждается"
+        ]
+      },
+      {
+        "title": "Безопасность",
+        "icon": "▲",
+        "items": [
+          "За действия лиц, выдающих себя за меня, ответственности не несу",
+          "Реквизиты, тег и ID неизменны",
+          "Сверяйте подлинность аккаунта перед сделками"
+        ]
+      },
+      {
+        "title": "Связь",
+        "icon": "●",
+        "items": [
+          "Пишите структурно, без воды",
+          "Отвечаю по настроению и приоритету",
+          "Группы почти не читаю",
+          "Почта: <a href=\"mailto:EvgeniyOst@xyecoc.com\">EvgeniyOst@xyecoc.com</a>"
+        ]
+      }
+    ]
+  },
+  "en": {
+    "brand": "OST",
+    "langLabel": "EN",
+    "footer": "© IamNotOst",
+    "hero": {
+      "greet": "Welcome!",
+      "name": "My name is",
+      "nameAccent": "Evgeniy",
+      "alias": "known as",
+      "aliasList": "“Ost” and “IamNotOst”"
+    },
+    "sections": [
+      {
+        "title": "About",
+        "icon": "◆",
+        "items": [
+          "Born — <code>26.09</code>",
+          "Fluent in Russian and English",
+          "Confident in <b>Python</b>, <b>Java</b>, <b>Lua</b>",
+          "Web stack: <b>HTML</b>, <b>CSS</b>, <b>JS</b> — applied level"
+        ]
+      },
+      {
+        "title": "Boundaries",
+        "icon": "◇",
+        "items": [
+          "Not looking for new acquaintances",
+          "In a relationship — <u>this is a line</u>",
+          "Personal space is not up for discussion"
+        ]
+      },
+      {
+        "title": "Security",
+        "icon": "▲",
+        "items": [
+          "Not responsible for actions of those impersonating me",
+          "My credentials, tag and ID never change",
+          "Verify account authenticity before any deals"
+        ]
+      },
+      {
+        "title": "Contact",
+        "icon": "●",
+        "items": [
+          "Write structured, no fluff",
+          "I reply by mood and priority",
+          "Almost never read group chats",
+          "Email: <a href=\"mailto:EvgeniyOst@xyecoc.com\">EvgeniyOst@xyecoc.com</a>"
+        ]
+      }
+    ]
+  }
+}
